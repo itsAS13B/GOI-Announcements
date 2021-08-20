@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>Jump King</title><meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#draggable" ).draggable();
+  } );
+  </script>
+  
+  <style>
+ 
+#draggable {
+    height: 10em;
+    position: relative }
+#draggable p {
+    margin: 0;
+    margin-right: 0px;
+    position: absolute;
+    top: 46%;
+    left: 49%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-family: arial;
+}
+
+button:active {
+    background-color: #f12222;
+}
+
+#top {
+    position: fixed;
+    top: 13px;
+    left: 13px;
+    z-index: 999;
+    width: 100%;
+    height: 23px;
+}
+
+  </style>
+   
+</head>
+
+<body style="background-color: #060606;" >
+ <div id="top">
+ <a href="https://www.twitch.tv/as13b" target="_blank"> <img style="width: 222px;height: 39px;opacity: 0.2;" src="https://itsas13b.github.io/logo.png"> </a>
+ </div>
+
+
+<table>
+<tr> <td> <img id="jk" src="1.png"></img> </td> 
+  
+  <td valign="bottom">
+
+<div id="draggable" class="ui-widget-content" style="position: relative; width: 130px; height: 44px; background: rgb(0, 133, 213) none repeat scroll 0% 0%; left: -698px; top: 60px; border: 13px groove rgb(0, 107, 186); color: rgb(0, 51, 59);" >
+  <p>Drag this</p>
+</div>
+
+<button type="button" id="item" style="width: 400px;height: 380px;font-size: 50px;background: white;" >  
+  <img id="bimg" src="b2.png"></img>
+    Jump!
+</button>
+  
+  
+  </td>
+  
+  
+  
+</tr>
+  <td align="center">
+  <progress id="prog" max="60" value="0" style="width: 100%;" ></progress>
+  <h1 id="t" style="color: white;font-size: 70px;margin: 0;font-family: arial;" ></h1>
+  </td>
+</table>
+
+  <script>
+    // The item (or items) to press and hold on
+    let item = document.querySelector("#item");
+
+    let timerID;
+    let counter = 0;
+
+    let pressHoldEvent = new CustomEvent("pressHold");
+
+    // Increase or decreae value to adjust how long
+    // one should keep pressing down before the pressHold
+    // event fires
+    let pressHoldDuration = 60;
+
+    // Listening for the mouse and touch events    
+    item.addEventListener("mousedown", pressingDown, false);
+    item.addEventListener("mouseup", notPressingDown, false);
+    item.addEventListener("mouseleave", notPressingDown, false);
+
+    item.addEventListener("touchstart", pressingDown, false);
+    item.addEventListener("touchend", notPressingDown, false);
+
+    // Listening for our custom pressHold event
+    item.addEventListener("pressHold", doSomething, false);
+
+    function pressingDown(e) { counter = 0;
+      // Start the timer
+      requestAnimationFrame(timer);
+
+      e.preventDefault();
+
+      console.log("Pressing!");
+	  
+	  document.getElementById('bimg').src = "b1.png";
+    }
+
+    function notPressingDown(e) {
+      // Stop the timer
+      console.log( counter );
+      cancelAnimationFrame(timerID);
+     
+	  document.getElementById('bimg').src = "b2.png";
+      console.log("Not pressing!");
+    }
+
+    //
+    // Runs at 60fps when you are pressing down
+    //
+    function timer() {
+      console.log("Timer tick!");
+
+      if (counter < pressHoldDuration) {
+        timerID = requestAnimationFrame(timer);
+		   if( counter > 0  && counter <= 5 )  document.getElementById('jk').src = "1.png";
+	  else if( counter > 5  && counter <= 10 ) document.getElementById('jk').src = "2.png";
+	  else if( counter > 10 && counter <= 15 ) document.getElementById('jk').src = "3.png";
+	  else if( counter > 15 && counter <= 20 ) document.getElementById('jk').src = "4.png";
+	  else if( counter > 20 && counter <= 25 ) document.getElementById('jk').src = "5.png";
+	  else if( counter > 25 && counter <= 30 ) document.getElementById('jk').src = "6.png"; 
+	  else if( counter > 30 && counter <= 35 ) document.getElementById('jk').src = "7.png";
+	  else if( counter > 35 && counter <= 40 ) document.getElementById('jk').src = "8.png";
+	  else if( counter > 40 && counter <= 45 ) document.getElementById('jk').src = "9.png";
+	  else if( counter > 45 && counter <= 50 ) document.getElementById('jk').src = "10.png";
+	  else if( counter > 50 && counter <= 55 ) document.getElementById('jk').src = "11.png";
+	  
+		 document.getElementById('t').innerHTML = Math.floor( ( counter * 100 ) / 60 ) + '%';
+        counter++; document.getElementById('prog').value = counter;
+      } else {
+        console.log("Press threshold reached!"); document.getElementById('jk').src = "12.png";   
+		document.getElementById('t').innerHTML = '100%';
+        item.dispatchEvent(pressHoldEvent);
+      }
+    }
+
+    function doSomething(e) {
+      console.log("pressHold event fired!");
+    }
+
+  </script>
+</body>
+
+</html>
