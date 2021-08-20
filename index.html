@@ -53,9 +53,23 @@ button:active {
 
 
 <table>
-<tr> <td> <img id="jk" src="1.png"></img> </td> 
+<tr> 
+<td> 
+<img id="jk" src="1.png"  class="jkimage" style=""></img> 
+<img id="jk2" src="2.png" class="jkimage" style="display:none;"></img> 
+<img id="jk3" src="3.png" class="jkimage" style="display:none;"></img> 
+<img id="jk4" src="4.png" class="jkimage" style="display:none;"></img> 
+<img id="jk5" src="5.png" class="jkimage" style="display:none;"></img> 
+<img id="jk6" src="6.png" class="jkimage" style="display:none;"></img> 
+<img id="jk7" src="7.png" class="jkimage" style="display:none;"></img> 
+<img id="jk8" src="8.png" class="jkimage" style="display:none;"></img> 
+<img id="jk9" src="9.png" class="jkimage" style="display:none;"></img> 
+<img id="jk10" src="10.png" class="jkimage" style="display:none;"></img> 
+<img id="jk11" src="11.png" class="jkimage" style="display:none;"></img> 
+<img id="jk12" src="12.png" class="jkimage" style="display:none;"></img> 
+</td> 
   
-  <td valign="bottom">
+  <td valign="top">
 
 <div id="draggable" class="ui-widget-content" style="position: relative; width: 130px; height: 44px; background: rgb(0, 133, 213) none repeat scroll 0% 0%; left: -698px; top: 60px; border: 13px groove rgb(0, 107, 186); color: rgb(0, 51, 59);" >
   <p>Drag this</p>
@@ -131,22 +145,25 @@ button:active {
 
       if (counter < pressHoldDuration) {
         timerID = requestAnimationFrame(timer);
-		   if( counter > 0  && counter <= 5 )  document.getElementById('jk').src = "1.png";
-	  else if( counter > 5  && counter <= 10 ) document.getElementById('jk').src = "2.png";
-	  else if( counter > 10 && counter <= 15 ) document.getElementById('jk').src = "3.png";
-	  else if( counter > 15 && counter <= 20 ) document.getElementById('jk').src = "4.png";
-	  else if( counter > 20 && counter <= 25 ) document.getElementById('jk').src = "5.png";
-	  else if( counter > 25 && counter <= 30 ) document.getElementById('jk').src = "6.png"; 
-	  else if( counter > 30 && counter <= 35 ) document.getElementById('jk').src = "7.png";
-	  else if( counter > 35 && counter <= 40 ) document.getElementById('jk').src = "8.png";
-	  else if( counter > 40 && counter <= 45 ) document.getElementById('jk').src = "9.png";
-	  else if( counter > 45 && counter <= 50 ) document.getElementById('jk').src = "10.png";
-	  else if( counter > 50 && counter <= 55 ) document.getElementById('jk').src = "11.png";
+		
+  var cols = document.getElementsByClassName('jkimage'); 
+  
+		   if( counter > 0  && counter <= 5 ) { for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk').style.display = "";  }
+	  else if( counter > 5  && counter <= 10 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk2').style.display = ""; }
+	  else if( counter > 10 && counter <= 15 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk3').style.display = ""; }
+	  else if( counter > 15 && counter <= 20 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk4').style.display = ""; }
+	  else if( counter > 20 && counter <= 25 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk5').style.display = ""; }
+	  else if( counter > 25 && counter <= 30 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk6').style.display = ""; }
+	  else if( counter > 30 && counter <= 35 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk7').style.display = ""; }
+	  else if( counter > 35 && counter <= 40 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk8').style.display = ""; }
+	  else if( counter > 40 && counter <= 45 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk9').style.display = ""; }
+	  else if( counter > 45 && counter <= 50 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk10').style.display = "";}
+	  else if( counter > 50 && counter <= 55 ){ for(i = 0; i < cols.length; i++) { cols[i].style.display = "none"; } document.getElementById('jk11').style.display = "";}
 	  
-		 document.getElementById('t').innerHTML = Math.floor( ( counter * 100 ) / 60 ) + '%';
+		document.getElementById('t').innerHTML = Math.floor( ( counter * 100 ) / 60 ) + '%';
         counter++; document.getElementById('prog').value = counter;
       } else {
-        console.log("Press threshold reached!"); document.getElementById('jk').src = "12.png";   
+        console.log("Press threshold reached!");  document.getElementById('jk11').style.display = "none";  document.getElementById('jk12').style.display = "";  
 		document.getElementById('t').innerHTML = '100%';
         item.dispatchEvent(pressHoldEvent);
       }
